@@ -42,7 +42,7 @@ private:
 	void drawTitle(int, int);
 	void drawGameOver(int, int);
 	bool detectCollision(int, int, int, int);
-	std::tuple <int, int, int, int> boundaryDetection(int, int, int, int);
+	std::tuple <int, int> boundaryDetection(int, int, int, int);
 	/********************************/
 private:
 	MainWindow& wnd;

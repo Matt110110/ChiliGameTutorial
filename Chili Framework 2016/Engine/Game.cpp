@@ -28927,7 +28927,34 @@ void Game::drawGameOver(int x, int y)
 	gfx.PutPixel(83 + x, 63 + y, 0, 146, 14);
 }
 
-std::tuple<int, int, int, int> Game::boundaryDetection(int x, int y, int width, int height)
+std::tuple<int, int> Game::boundaryDetection(int x, int y, int width, int height)
 {
-	return std::tuple<int, int, int, int>();
+	int retX, retY;
+	const int right = x + width;
+	const int bottom = y + height;
+	if (x < 0)
+	{
+		retX = 0;
+	}
+	else if (right >= gfx.ScreenWidth)
+	{
+		retX = (gfx.ScreenWidth - 1) - width;
+	}
+	else
+	{
+		retX = x;
+	}
+	if (y < 0)
+	{
+		retY = 0;
+	}
+	else if (right >= gfx.ScreenHeight)
+	{
+		retY = (gfx.ScreenHeight - 1) - height;
+	}
+	else
+	{
+		retY = y;
+	}
+	return {retX, retY};
 }
