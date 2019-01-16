@@ -23,6 +23,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include <tuple>
 
 class Game
 {
@@ -36,11 +37,19 @@ private:
 	void UpdateModel();
 	/********************************/
 	/*  User Functions              */
+	void drawFace(int, int);
+	void drawPoo(int, int);
+	void drawTitle(int, int);
+	void drawGameOver(int, int);
+	bool detectCollision(int, int, int, int);
+	std::tuple <int, int, int, int> boundaryDetection(int, int, int, int);
 	/********************************/
 private:
 	MainWindow& wnd;
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	int dudeX = 400, dudeY = 300, poo0X = 300, poo0Y = 150, poo1X = 100, poo1Y = 500, poo2X = 600, poo2Y = 400, dudeHeight = 20, dudeWidth = 20;
+	bool poo0isEaten = false, poo1isEaten = false, poo2isEaten = false;
 	/********************************/
 };

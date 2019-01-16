@@ -1,7 +1,9 @@
 ﻿  Game.cpp
+  Main.cpp
+  MainWindow.cpp
   Generating code
-  8 of 561 functions ( 1.4%) were compiled, the rest were copied from previous compilation.
-    2 functions were new in current compilation
+  12 of 562 functions ( 2.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
     1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  Engine.vcxproj -> C:\Users\matru\Downloads\Chili DirectX Framework\Chili Framework 2016\Release\Engine.exe
+  Engine.vcxproj -> C:\Code\Git\ChiliGameTutorial\Chili Framework 2016\Release\Engine.exe
