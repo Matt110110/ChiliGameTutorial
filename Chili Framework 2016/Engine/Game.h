@@ -24,6 +24,7 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "Poop.h"
+#include "Person.h"
 #include <tuple>
 
 class Game
@@ -43,14 +44,13 @@ private:
 	void drawTitle(int, int);
 	void drawGameOver(int, int);
 	bool detectCollision(int, int, int, int, int, int, int, int);
-	std::tuple <int, int> boundaryDetection(int, int, int, int);
 	/********************************/
 private:
 	MainWindow& wnd;
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
-	int dudeX = 400, dudeY = 300, dudeHeight = 20, dudeWidth = 20;
+	Person dude;
 	Poop poop0, poop1, poop2;
 	bool poo0isEaten = false, poo1isEaten = false, poo2isEaten = false, isStarted = false;
 	/********************************/

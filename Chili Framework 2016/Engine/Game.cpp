@@ -22,6 +22,8 @@ Game::Game(MainWindow& wnd) : wnd(wnd), gfx(wnd)
 	poop1.setVY(vy(rng));
 	poop2.setVX(vx(rng));
 	poop2.setVY(vy(rng));
+	dude.setX(390);
+	dude.setY(290);
 }
 
 void Game::Go()
@@ -46,7 +48,7 @@ void Game::ComposeFrame()
 		}
 		else
 		{
-			drawFace(dudeX, dudeY);
+			drawFace(dude.getX(), dude.getY());
 			if (!poo0isEaten)
 			{
 				drawPoo(poop0.getX(), poop0.getY());
@@ -76,74 +78,39 @@ void Game::UpdateModel()
 	{
 		if (wnd.kbd.KeyIsPressed(VK_RIGHT))
 		{
-			dudeX += 5;
+			dude.setX( dude.getX() + 5 );
 		}
 		if (wnd.kbd.KeyIsPressed(VK_LEFT))
 		{
-			dudeX -= 5;
+			dude.setX(dude.getX() - 5);
 		}
 		if (wnd.kbd.KeyIsPressed(VK_UP))
 		{
-			dudeY -= 5;
+			dude.setY(dude.getY() - 5);
 		}
 		if (wnd.kbd.KeyIsPressed(VK_DOWN))
 		{
-			dudeY += 5;
+			dude.setY(dude.getY() + 5);
 		}
-		auto boundDude = boundaryDetection(dudeX, dudeY, dudeWidth, dudeHeight);
-		dudeX = std::get<0>(boundDude);
-		dudeY = std::get<1>(boundDude);
-		
+		dude.Update();
+
 		poop0.Update();
 		poop1.Update();
 		poop2.Update();
 
-		if (detectCollision(dudeX, dudeY, dudeWidth, dudeHeight, poop0.getX(), poop0.getY(), poop0.getWidth(), poop0.getHeight()))
+		if (detectCollision(dude.getX(), dude.getY(), dude.WIDTH, dude.HEIGHT, poop0.getX(), poop0.getY(), poop0.WIDTH, poop0.HEIGHT))
 		{
 			poo0isEaten = true;
 		}
-		if (detectCollision(dudeX, dudeY, dudeWidth, dudeHeight, poop1.getX(), poop1.getY(), poop1.getWidth(), poop1.getHeight()))
+		if (detectCollision(dude.getX(), dude.getY(), dude.WIDTH, dude.HEIGHT, poop1.getX(), poop1.getY(), poop1.WIDTH, poop1.HEIGHT))
 		{
 			poo1isEaten = true;
 		}
-		if (detectCollision(dudeX, dudeY, dudeWidth, dudeHeight, poop2.getX(), poop2.getY(), poop2.getWidth(), poop2.getHeight()))
+		if (detectCollision(dude.getX(), dude.getY(), dude.WIDTH, dude.HEIGHT, poop2.getX(), poop2.getY(), poop2.WIDTH, poop2.HEIGHT))
 		{
 			poo2isEaten = true;
 		}
 	}
-}
-
-std::tuple<int, int> Game::boundaryDetection(int x, int y, int width, int height)
-{
-	int retX, retY;
-	const int right = x + width;
-	const int bottom = y + height;
-	if (x <= 0)
-	{
-		retX = 0;
-	}
-	else if (right >= gfx.ScreenWidth)
-	{
-		retX = (gfx.ScreenWidth - 1) - width;
-	}
-	else
-	{
-		retX = x;
-	}
-
-	if (y <= 0)
-	{
-		retY = 0;
-	}
-	else if (bottom >= gfx.ScreenHeight)
-	{
-		retY = (gfx.ScreenHeight - 1) - height;
-	}
-	else
-	{
-		retY = y;
-	}
-	return {retX, retY};
 }
 
 bool Game::detectCollision(int x0, int y0, int width0, int height0, int x1, int y1, int width1, int height1)
