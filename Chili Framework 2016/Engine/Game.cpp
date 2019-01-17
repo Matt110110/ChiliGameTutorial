@@ -10,18 +10,18 @@ Game::Game(MainWindow& wnd) : wnd(wnd), gfx(wnd)
 	std::uniform_int_distribution<int> yDist(0, 570);
 	std::uniform_int_distribution<int> vx(1, 5);
 	std::uniform_int_distribution<int> vy(1, 5);
-	poo0X = xDist(rng);
-	poo0Y = yDist(rng);
-	poo1X = xDist(rng);
-	poo1Y = yDist(rng);
-	poo2X = xDist(rng);
-	poo2Y = yDist(rng);
-	v0x = vx(rng);
-	v0y = vy(rng);
-	v1x = vx(rng);
-	v1y = vy(rng);
-	v2x = vx(rng);
-	v2y = vy(rng);
+	poop0.x = xDist(rng);
+	poop0.y = yDist(rng);
+	poop1.x = xDist(rng);
+	poop1.y = yDist(rng);
+	poop2.x = xDist(rng);
+	poop2.y = yDist(rng);
+	poop0.vx = vx(rng);
+	poop0.vy = vy(rng);
+	poop1.vx = vx(rng);
+	poop1.vy = vy(rng);
+	poop2.vx = vx(rng);
+	poop2.vy = vy(rng);
 }
 
 void Game::Go()
@@ -49,30 +49,15 @@ void Game::ComposeFrame()
 			drawFace(dudeX, dudeY);
 			if (!poo0isEaten)
 			{
-				auto poo = updateSpeed(poo0X, poo0Y, pooWidth, pooHeight, v0x, v0y);
-				poo0X = std::get<0>(poo);
-				poo0Y = std::get<1>(poo);
-				v0x = std::get<2>(poo);
-				v0y = std::get<3>(poo);
-				drawPoo(poo0X, poo0Y);
+				drawPoo(poop0.x, poop0.y);
 			}
 			if (!poo1isEaten)
 			{
-				auto poo = updateSpeed(poo1X, poo1Y, pooWidth, pooHeight, v1x, v1y);
-				poo1X = std::get<0>(poo);
-				poo1Y = std::get<1>(poo);
-				v1x = std::get<2>(poo);
-				v1y = std::get<3>(poo);
-				drawPoo(poo1X, poo1Y);
+				drawPoo(poop1.x, poop1.y);
 			}
 			if (!poo2isEaten)
 			{
-				auto poo = updateSpeed(poo2X, poo2Y, pooWidth, pooHeight, v2x, v2y);
-				poo2X = std::get<0>(poo);
-				poo2Y = std::get<1>(poo);
-				v2x = std::get<2>(poo);
-				v2y = std::get<3>(poo);
-				drawPoo(poo2X, poo2Y);
+				drawPoo(poop2.x, poop2.y);
 			}
 		}
 	}
@@ -108,16 +93,20 @@ void Game::UpdateModel()
 		auto boundDude = boundaryDetection(dudeX, dudeY, dudeWidth, dudeHeight);
 		dudeX = std::get<0>(boundDude);
 		dudeY = std::get<1>(boundDude);
+		
+		poop0.Update();
+		poop1.Update();
+		poop2.Update();
 
-		if (detectCollision(dudeX, dudeY, dudeWidth, dudeHeight, poo0X, poo0Y, pooWidth, pooHeight))
+		if (detectCollision(dudeX, dudeY, dudeWidth, dudeHeight, poop0.x, poop0.y, poop0.WIDTH, poop0.HEIGHT))
 		{
 			poo0isEaten = true;
 		}
-		if (detectCollision(dudeX, dudeY, dudeWidth, dudeHeight, poo1X, poo1Y, pooWidth, pooHeight))
+		if (detectCollision(dudeX, dudeY, dudeWidth, dudeHeight, poop1.x, poop1.y, poop1.WIDTH, poop1.HEIGHT))
 		{
 			poo1isEaten = true;
 		}
-		if (detectCollision(dudeX, dudeY, dudeWidth, dudeHeight, poo2X, poo2Y, pooWidth, pooHeight))
+		if (detectCollision(dudeX, dudeY, dudeWidth, dudeHeight, poop2.x, poop2.y, poop2.WIDTH, poop2.HEIGHT))
 		{
 			poo2isEaten = true;
 		}
@@ -155,38 +144,6 @@ std::tuple<int, int> Game::boundaryDetection(int x, int y, int width, int height
 		retY = y;
 	}
 	return {retX, retY};
-}
-
-std::tuple<int, int, int, int> Game::updateSpeed(int x, int y, int width, int height, int vx, int vy)
-{
-	int retX, retY;
-	const int right = x + width;
-	const int bottom = y + height;
-	if (x < 5)
-	{
-		retX = 5;
-		vx *= -1;
-	}
-	else if (right >= gfx.ScreenWidth - 5)
-	{
-		retX = (gfx.ScreenWidth - 5) - width;
-		vx *= -1;
-	}
-	retX = x + vx;
-
-	if (y < 5)
-	{
-		retY = 5;
-		vy *= -1;
-	}
-	else if (bottom >= gfx.ScreenHeight - 5)
-	{
-		retY = (gfx.ScreenHeight - 5) - height;
-		vy *= -1;
-	}
-	retY = y + vy;
-
-	return { retX, retY, vx, vy };
 }
 
 bool Game::detectCollision(int x0, int y0, int width0, int height0, int x1, int y1, int width1, int height1)
