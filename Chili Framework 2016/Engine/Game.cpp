@@ -10,18 +10,18 @@ Game::Game(MainWindow& wnd) : wnd(wnd), gfx(wnd)
 	std::uniform_int_distribution<int> yDist(0, 570);
 	std::uniform_int_distribution<int> vx(1, 5);
 	std::uniform_int_distribution<int> vy(1, 5);
-	poop0.x = xDist(rng);
-	poop0.y = yDist(rng);
-	poop1.x = xDist(rng);
-	poop1.y = yDist(rng);
-	poop2.x = xDist(rng);
-	poop2.y = yDist(rng);
-	poop0.vx = vx(rng);
-	poop0.vy = vy(rng);
-	poop1.vx = vx(rng);
-	poop1.vy = vy(rng);
-	poop2.vx = vx(rng);
-	poop2.vy = vy(rng);
+	poop0.setX( xDist(rng) );
+	poop0.setY( yDist(rng) );
+	poop1.setX(xDist(rng));
+	poop1.setY(yDist(rng));
+	poop2.setX(xDist(rng));
+	poop2.setY(yDist(rng));
+	poop0.setVX(vx(rng));
+	poop0.setVY(vy(rng));
+	poop1.setVX(vx(rng));
+	poop1.setVY(vy(rng));
+	poop2.setVX(vx(rng));
+	poop2.setVY(vy(rng));
 }
 
 void Game::Go()
@@ -49,15 +49,15 @@ void Game::ComposeFrame()
 			drawFace(dudeX, dudeY);
 			if (!poo0isEaten)
 			{
-				drawPoo(poop0.x, poop0.y);
+				drawPoo(poop0.getX(), poop0.getY());
 			}
 			if (!poo1isEaten)
 			{
-				drawPoo(poop1.x, poop1.y);
+				drawPoo(poop1.getX(), poop1.getY());
 			}
 			if (!poo2isEaten)
 			{
-				drawPoo(poop2.x, poop2.y);
+				drawPoo(poop2.getX(), poop2.getY());
 			}
 		}
 	}
@@ -98,15 +98,15 @@ void Game::UpdateModel()
 		poop1.Update();
 		poop2.Update();
 
-		if (detectCollision(dudeX, dudeY, dudeWidth, dudeHeight, poop0.x, poop0.y, poop0.WIDTH, poop0.HEIGHT))
+		if (detectCollision(dudeX, dudeY, dudeWidth, dudeHeight, poop0.getX(), poop0.getY(), poop0.getWidth(), poop0.getHeight()))
 		{
 			poo0isEaten = true;
 		}
-		if (detectCollision(dudeX, dudeY, dudeWidth, dudeHeight, poop1.x, poop1.y, poop1.WIDTH, poop1.HEIGHT))
+		if (detectCollision(dudeX, dudeY, dudeWidth, dudeHeight, poop1.getX(), poop1.getY(), poop1.getWidth(), poop1.getHeight()))
 		{
 			poo1isEaten = true;
 		}
-		if (detectCollision(dudeX, dudeY, dudeWidth, dudeHeight, poop2.x, poop2.y, poop2.WIDTH, poop2.HEIGHT))
+		if (detectCollision(dudeX, dudeY, dudeWidth, dudeHeight, poop2.getX(), poop2.getY(), poop2.getWidth(), poop2.getHeight()))
 		{
 			poo2isEaten = true;
 		}

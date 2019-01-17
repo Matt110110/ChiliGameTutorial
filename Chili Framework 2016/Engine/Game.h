@@ -44,7 +44,6 @@ private:
 	void drawGameOver(int, int);
 	bool detectCollision(int, int, int, int, int, int, int, int);
 	std::tuple <int, int> boundaryDetection(int, int, int, int);
-	std::tuple <int, int, int, int> updateSpeed(int, int, int, int, int, int);
 	/********************************/
 private:
 	MainWindow& wnd;
