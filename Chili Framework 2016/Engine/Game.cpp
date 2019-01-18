@@ -42,5 +42,11 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	gfx.PutPixel(100, 100, 255, 255, 255);
+	for (int i = 0; i < 300; i++)
+	{
+		for (int j = 0; j < 300; j++)
+		{
+			gfx.PutPixel(i, j, 255, 243, 125);
+		}
+	}
 }
