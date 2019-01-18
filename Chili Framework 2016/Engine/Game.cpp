@@ -38,15 +38,57 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	if (wnd.kbd.KeyIsPressed(VK_LEFT) && x > 0)
+	{
+		x--;
+		WIDTH--;
+	}
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT) && WIDTH < gfx.ScreenWidth - 2)
+	{
+		x++;
+		WIDTH++;
+	}
+	if (wnd.kbd.KeyIsPressed(VK_UP) && y > 0)
+	{
+		y--;
+		HEIGHT--;
+	}
+	if (wnd.kbd.KeyIsPressed(VK_DOWN) && HEIGHT < gfx.ScreenHeight - 2)
+	{
+		y++;
+		HEIGHT++;
+	}
+
+	if (wnd.kbd.KeyIsPressed('W') && HEIGHT > 0)
+	{
+		HEIGHT--;
+	}
+	if (wnd.kbd.KeyIsPressed('S') && HEIGHT < gfx.ScreenHeight - 1)
+	{
+		HEIGHT++;
+	}
+	if (wnd.kbd.KeyIsPressed('A') && WIDTH > 0)
+	{
+		WIDTH--;
+	}
+	if (wnd.kbd.KeyIsPressed('D') && WIDTH < gfx.ScreenWidth - 1)
+	{
+		WIDTH++;
+	}
 }
 
-void Game::ComposeFrame()
+void Game::draw()
 {
-	for (int i = 0; i < 300; i++)
+	for (int i = x; i < WIDTH; i++)
 	{
-		for (int j = 0; j < 300; j++)
+		for (int j = y; j < HEIGHT; j++)
 		{
 			gfx.PutPixel(i, j, 255, 243, 125);
 		}
 	}
+}
+
+void Game::ComposeFrame()
+{
+	draw();
 }
