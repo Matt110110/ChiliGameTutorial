@@ -45,6 +45,7 @@ private:
 		float x,y,z;		// position
 		float u,v;			// texcoords
 	};
+	void testAndSwap(int &a, int &b);
 public:
 	Graphics( class HWNDKey& key );
 	Graphics( const Graphics& ) = delete;
@@ -56,6 +57,9 @@ public:
 		PutPixel( x,y,{ unsigned char( r ),unsigned char( g ),unsigned char( b ) } );
 	}
 	void PutPixel( int x,int y,Color c );
+
+	// Takes the starting vertex and ending vertex and draws a rectangle of given color
+	void DrawRect(int, int, int, int, Color);
 	~Graphics();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>				pSwapChain;

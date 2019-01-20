@@ -40,6 +40,16 @@ namespace FramebufferShaders
 
 using Microsoft::WRL::ComPtr;
 
+void Graphics::testAndSwap(int &a, int &b)
+{
+	if (a > b)
+	{
+		const int temp = a;
+		a = b;
+		b = temp;
+	}
+}
+
 Graphics::Graphics( HWNDKey& key )
 {
 	assert( key.hWnd != nullptr );
@@ -238,6 +248,19 @@ Graphics::Graphics( HWNDKey& key )
 	// allocate memory for sysbuffer (16-byte aligned for faster access)
 	pSysBuffer = reinterpret_cast<Color*>( 
 		_aligned_malloc( sizeof( Color ) * Graphics::ScreenWidth * Graphics::ScreenHeight,16u ) );
+}
+
+void Graphics::DrawRect(int x0, int y0, int x1, int y1, Color c)
+{
+	testAndSwap(x0, x1);
+	testAndSwap(y0, y1);
+	for (int y = y0; y < y1; y++)
+	{
+		for (int x = x0; x < x1; x++)
+		{
+			PutPixel(x, y, c);
+		}
+	}
 }
 
 Graphics::~Graphics()
