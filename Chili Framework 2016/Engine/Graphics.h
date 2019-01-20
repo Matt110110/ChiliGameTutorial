@@ -45,7 +45,7 @@ private:
 		float x,y,z;		// position
 		float u,v;			// texcoords
 	};
-	void testAndSwap(int &a, int &b);
+
 public:
 	Graphics( class HWNDKey& key );
 	Graphics( const Graphics& ) = delete;
