@@ -24,6 +24,7 @@
 #include "ChiliException.h"
 #include <assert.h>
 #include <string>
+#include <tuple>
 #include <array>
 
 // Ignore the intellisense error "cannot open source file" for .shh files.
@@ -238,6 +239,36 @@ Graphics::Graphics( HWNDKey& key )
 	// allocate memory for sysbuffer (16-byte aligned for faster access)
 	pSysBuffer = reinterpret_cast<Color*>( 
 		_aligned_malloc( sizeof( Color ) * Graphics::ScreenWidth * Graphics::ScreenHeight,16u ) );
+}
+
+void Graphics::DrawRect(int x0, int y0, int x1, int y1, Color c)
+{
+	if (x0 > x1)
+	{
+		std::swap(x0, x1);
+	}
+	if (y0 > y1)
+	{
+		std::swap(y0, y1);
+	}
+	for (int y = y0; y < y1; y++)
+	{
+		for (int x = x0; x < x1; x++)
+		{
+			PutPixel(x, y, c);
+		}
+	}
+}
+
+void Graphics::DrawRect(std::tuple<int, int> xy, int width, int height, Color c)
+{
+	for (int i = std::get<1>(xy); i < height; i++)
+	{
+		for (int j = std::get<0>(xy); j < width; j++)
+		{
+			PutPixel(j, i, c);
+		}
+	}
 }
 
 Graphics::~Graphics()

@@ -20,6 +20,7 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include <tuple>
 
 Game::Game( MainWindow& wnd )
 	:
@@ -38,57 +39,33 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	if (wnd.kbd.KeyIsPressed(VK_LEFT) && x > 0)
+	if (wnd.kbd.KeyIsPressed(VK_UP) && y0 > 0)
 	{
-		x--;
-		WIDTH--;
+		--y0;
 	}
-	if (wnd.kbd.KeyIsPressed(VK_RIGHT) && WIDTH < gfx.ScreenWidth - 2)
+	if (wnd.kbd.KeyIsPressed(VK_DOWN))
 	{
-		x++;
-		WIDTH++;
+		++y0;
 	}
-	if (wnd.kbd.KeyIsPressed(VK_UP) && y > 0)
+	if (wnd.kbd.KeyIsPressed(VK_LEFT) && x0 > 0)
 	{
-		y--;
-		HEIGHT--;
+		--x0;
 	}
-	if (wnd.kbd.KeyIsPressed(VK_DOWN) && HEIGHT < gfx.ScreenHeight - 2)
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
 	{
-		y++;
-		HEIGHT++;
+		++x0;
 	}
-
-	if (wnd.kbd.KeyIsPressed('W') && HEIGHT > 0)
+	if (wnd.mouse.LeftIsPressed())
 	{
-		HEIGHT--;
-	}
-	if (wnd.kbd.KeyIsPressed('S') && HEIGHT < gfx.ScreenHeight - 1)
-	{
-		HEIGHT++;
-	}
-	if (wnd.kbd.KeyIsPressed('A') && WIDTH > 0)
-	{
-		WIDTH--;
-	}
-	if (wnd.kbd.KeyIsPressed('D') && WIDTH < gfx.ScreenWidth - 1)
-	{
-		WIDTH++;
-	}
-}
-
-void Game::draw()
-{
-	for (int i = x; i < WIDTH; i++)
-	{
-		for (int j = y; j < HEIGHT; j++)
-		{
-			gfx.PutPixel(i, j, 255, 243, 125);
-		}
+		x1 = wnd.mouse.GetPosX();
+		y1 = wnd.mouse.GetPosY();
 	}
 }
 
 void Game::ComposeFrame()
 {
-	draw();
+	gfx.DrawRect(x0, y0, x1, y1, Colors::MakeRGB(241, 172, 238));
+
+	/// Proof of concept for Lesson 11 Homework part 2
+	//gfx.DrawRect({ x0, y0 }, WIDTH, HEIGHT, Colors::Green);
 }
