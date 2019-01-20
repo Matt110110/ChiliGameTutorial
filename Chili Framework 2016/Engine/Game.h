@@ -40,7 +40,7 @@ private:
 private:
 	MainWindow& wnd;
 	Graphics gfx;
-	int x0 = 100, y0 = 100, x1 = 200, y1 = 200;
+	int x0 = 100, y0 = 100, x1 = 200, y1 = 200, WIDTH = 200, HEIGHT = 200;
 	/********************************/
 	/*  User Variables              */
 	/********************************/

@@ -20,6 +20,7 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include <tuple>
 
 Game::Game( MainWindow& wnd )
 	:
@@ -38,7 +39,7 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	if (wnd.kbd.KeyIsPressed(VK_UP))
+	if (wnd.kbd.KeyIsPressed(VK_UP) && y0 > 0)
 	{
 		--y0;
 	}
@@ -46,7 +47,7 @@ void Game::UpdateModel()
 	{
 		++y0;
 	}
-	if (wnd.kbd.KeyIsPressed(VK_LEFT))
+	if (wnd.kbd.KeyIsPressed(VK_LEFT) && x0 > 0)
 	{
 		--x0;
 	}
@@ -64,4 +65,7 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	gfx.DrawRect(x0, y0, x1, y1, Colors::MakeRGB(241, 172, 238));
+
+	/// Proof of concept for Lesson 11 Homework part 2
+	//gfx.DrawRect({ x0, y0 }, WIDTH, HEIGHT, Colors::Green);
 }
