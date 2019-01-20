@@ -39,8 +39,6 @@ private:
 	void UpdateModel();
 	/********************************/
 	/*  User Functions              */
-	void drawFace(int, int);
-	void drawPoo(int, int);
 	void drawTitle(int, int);
 	void drawGameOver(int, int);
 	bool detectCollision(int, int, int, int, int, int, int, int);

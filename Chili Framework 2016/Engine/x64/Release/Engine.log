@@ -1,11 +1,10 @@
 ﻿  Game.cpp
   Main.cpp
   MainWindow.cpp
-  Person.cpp
   Poop.cpp
   Generating code
-  29 of 606 functions ( 4.8%) were compiled, the rest were copied from previous compilation.
-    13 functions were new in current compilation
+  11 of 606 functions ( 1.8%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
     5 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Engine.vcxproj -> C:\Code\Git\ChiliGameTutorial\Chili Framework 2016\x64\Release\Engine.exe

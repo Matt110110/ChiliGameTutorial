@@ -1,4 +1,6 @@
 #pragma once
+#include "Graphics.h"
+
 class Poop
 {
 	int x, y, vx, vy;
@@ -9,6 +11,7 @@ public:
 	// Update velocity and collision testing
 	void Update();
 
+	void Draw(Graphics &) const;
 	// Setters
 	inline void setX(int value) { x = value; }
 	inline void setY(int value) { y = value; }
