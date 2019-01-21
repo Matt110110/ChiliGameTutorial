@@ -1,7 +1,6 @@
 #include "Person.h"
-#include "Graphics.h"
 
-void Person::Draw(Graphics & gfx) const
+void Person::Draw(Graphics & gfx)
 {
 	gfx.PutPixel(7 + x, 0 + y, 0, 0, 0);
 	gfx.PutPixel(8 + x, 0 + y, 0, 0, 0);
@@ -319,7 +318,6 @@ void Person::Draw(Graphics & gfx) const
 	gfx.PutPixel(10 + x, 19 + y, 0, 0, 0);
 	gfx.PutPixel(11 + x, 19 + y, 0, 0, 0);
 	gfx.PutPixel(12 + x, 19 + y, 0, 0, 0);
-
 }
 
 void Person::Update()
@@ -347,6 +345,12 @@ void Person::Update()
 
 Person::Person()
 {
+}
+
+Person::Person(int _x, int _y)
+{
+	x = _x;
+	y = _y;
 }
 
 

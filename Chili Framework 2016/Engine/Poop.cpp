@@ -270,6 +270,14 @@ Poop::Poop()
 {
 }
 
+Poop::Poop(int _x, int _y, int _vx, int _vy)
+{
+	x = _x;
+	y = _y;
+	vx = _vx;
+	vy = _vy;
+}
+
 
 Poop::~Poop()
 {

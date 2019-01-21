@@ -26,6 +26,7 @@
 #include "Poop.h"
 #include "Person.h"
 #include <tuple>
+#include <random>
 
 class Game
 {
@@ -43,13 +44,19 @@ private:
 	void drawGameOver(int, int);
 	bool detectCollision(int, int, int, int, int, int, int, int);
 	/********************************/
-private:
 	MainWindow& wnd;
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	/// Order of declaration of objects matters, not calling of constructors. Always make sure the objects who are more important to the project always stays on top, but below the objects it depends upon
+	std::random_device rd;
+	std::mt19937 rng;
+	std::uniform_int_distribution<int> xDist;
+	std::uniform_int_distribution<int> yDist;
+	std::uniform_int_distribution<int> vx;
+	std::uniform_int_distribution<int> vy;
 	Person dude;
-	Poop poop0, poop1, poop2;
-	bool poo0isEaten = false, poo1isEaten = false, poo2isEaten = false, isStarted = false;
+	Poop poop0, poop1, poop2, poop3, poop4, poop5, poop6, poop7, poop8;
+	bool isStarted = false;
 	/********************************/
 };

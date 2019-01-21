@@ -1,30 +1,24 @@
 #include "MainWindow.h"
 #include "Game.h"
-#include <random>
 
-Game::Game(MainWindow& wnd) : wnd(wnd), gfx(wnd)
-{
-	std::random_device rd;
-	std::mt19937 rng(rd());
-	std::uniform_int_distribution<int> xDist(0, 770);
-	std::uniform_int_distribution<int> yDist(0, 570);
-	std::uniform_int_distribution<int> vx(1, 5);
-	std::uniform_int_distribution<int> vy(1, 5);
-	poop0.setX( xDist(rng) );
-	poop0.setY( yDist(rng) );
-	poop1.setX(xDist(rng));
-	poop1.setY(yDist(rng));
-	poop2.setX(xDist(rng));
-	poop2.setY(yDist(rng));
-	poop0.setVX(vx(rng));
-	poop0.setVY(vy(rng));
-	poop1.setVX(vx(rng));
-	poop1.setVY(vy(rng));
-	poop2.setVX(vx(rng));
-	poop2.setVY(vy(rng));
-	dude.setX(390);
-	dude.setY(290);
-}
+Game::Game(MainWindow& wnd) : wnd(wnd),
+	gfx(wnd), 
+	rng(rd()), 
+	xDist(0, 770), 
+	yDist(0, 570), 
+	vx(1, 5), 
+	vy(1, 5), 
+	poop0(xDist(rng), yDist(rng), vx(rng), vy(rng)), 
+	poop1(xDist(rng), yDist(rng), vx(rng), vy(rng)), 
+	poop2(xDist(rng), yDist(rng), vx(rng), vy(rng)),
+	poop3(xDist(rng), yDist(rng), vx(rng), vy(rng)),
+	poop4(xDist(rng), yDist(rng), vx(rng), vy(rng)),
+	poop5(xDist(rng), yDist(rng), vx(rng), vy(rng)),
+	poop6(xDist(rng), yDist(rng), vx(rng), vy(rng)),
+	poop7(xDist(rng), yDist(rng), vx(rng), vy(rng)),
+	poop8(xDist(rng), yDist(rng), vx(rng), vy(rng)),
+	dude(390, 290)
+{}
 
 void Game::Go()
 {
@@ -42,24 +36,48 @@ void Game::ComposeFrame()
 	}
 	else
 	{
-		if (poo0isEaten && poo1isEaten && poo2isEaten)
+		if (poop0.getIsEaten() && poop1.getIsEaten() && poop2.getIsEaten() && poop3.getIsEaten() && poop4.getIsEaten() && poop5.getIsEaten() && poop6.getIsEaten() && poop7.getIsEaten() && poop8.getIsEaten())
 		{
 			drawGameOver(358, 268);
 		}
 		else
 		{
 			dude.Draw(gfx);
-			if (!poo0isEaten)
+			if (!poop0.getIsEaten())
 			{
 				poop0.Draw(gfx);
 			}
-			if (!poo1isEaten)
+			if (!poop1.getIsEaten())
 			{
 				poop1.Draw(gfx);
 			}
-			if (!poo2isEaten)
+			if (!poop2.getIsEaten())
 			{
 				poop2.Draw(gfx);
+			}
+			if (!poop3.getIsEaten())
+			{
+				poop3.Draw(gfx);
+			}
+			if (!poop4.getIsEaten())
+			{
+				poop4.Draw(gfx);
+			}
+			if (!poop5.getIsEaten())
+			{
+				poop5.Draw(gfx);
+			}
+			if (!poop6.getIsEaten())
+			{
+				poop6.Draw(gfx);
+			}
+			if (!poop7.getIsEaten())
+			{
+				poop7.Draw(gfx);
+			}
+			if (!poop8.getIsEaten())
+			{
+				poop8.Draw(gfx);
 			}
 		}
 	}
@@ -97,18 +115,48 @@ void Game::UpdateModel()
 		poop0.Update();
 		poop1.Update();
 		poop2.Update();
+		poop3.Update();
+		poop4.Update();
+		poop5.Update();
+		poop6.Update();
+		poop7.Update();
+		poop8.Update();
 
 		if (detectCollision(dude.getX(), dude.getY(), dude.WIDTH, dude.HEIGHT, poop0.getX(), poop0.getY(), poop0.WIDTH, poop0.HEIGHT))
 		{
-			poo0isEaten = true;
+			poop0.setIsEaten(true);
 		}
 		if (detectCollision(dude.getX(), dude.getY(), dude.WIDTH, dude.HEIGHT, poop1.getX(), poop1.getY(), poop1.WIDTH, poop1.HEIGHT))
 		{
-			poo1isEaten = true;
+			poop1.setIsEaten(true);
 		}
 		if (detectCollision(dude.getX(), dude.getY(), dude.WIDTH, dude.HEIGHT, poop2.getX(), poop2.getY(), poop2.WIDTH, poop2.HEIGHT))
 		{
-			poo2isEaten = true;
+			poop2.setIsEaten(true);
+		}
+		if (detectCollision(dude.getX(), dude.getY(), dude.WIDTH, dude.HEIGHT, poop3.getX(), poop3.getY(), poop3.WIDTH, poop3.HEIGHT))
+		{
+			poop3.setIsEaten(true);
+		}
+		if (detectCollision(dude.getX(), dude.getY(), dude.WIDTH, dude.HEIGHT, poop4.getX(), poop4.getY(), poop4.WIDTH, poop4.HEIGHT))
+		{
+			poop4.setIsEaten(true);
+		}
+		if (detectCollision(dude.getX(), dude.getY(), dude.WIDTH, dude.HEIGHT, poop5.getX(), poop5.getY(), poop5.WIDTH, poop5.HEIGHT))
+		{
+			poop5.setIsEaten(true);
+		}
+		if (detectCollision(dude.getX(), dude.getY(), dude.WIDTH, dude.HEIGHT, poop6.getX(), poop6.getY(), poop6.WIDTH, poop6.HEIGHT))
+		{
+			poop6.setIsEaten(true);
+		}
+		if (detectCollision(dude.getX(), dude.getY(), dude.WIDTH, dude.HEIGHT, poop7.getX(), poop7.getY(), poop7.WIDTH, poop7.HEIGHT))
+		{
+			poop7.setIsEaten(true);
+		}
+		if (detectCollision(dude.getX(), dude.getY(), dude.WIDTH, dude.HEIGHT, poop8.getX(), poop8.getY(), poop8.WIDTH, poop8.HEIGHT))
+		{
+			poop8.setIsEaten(true);
 		}
 	}
 }
