@@ -42,5 +42,13 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	gfx.PutPixel(100, 100, 255, 255, 255);
+	std::mt19937_64 rng(69);
+	std::uniform_int_distribution<int> dist(0, 1000);
+	int n1[3] = { dist(rng), dist(rng), dist(rng) };
+	int n2[3];
+	n2[0] = dist(rng);
+	n2[1] = dist(rng);
+	n2[2] = dist(rng);
+
+
 }
