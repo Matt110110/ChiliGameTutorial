@@ -2,7 +2,7 @@
 #include <assert.h>
 
 
-void Board::DrawCell(std::tuple<int, int>& loc, Color c)
+void Board::DrawCell(const Location& loc, Color c)
 {
 	int x = std::get<0>(loc);
 	int y = std::get<1>(loc);
