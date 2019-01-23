@@ -24,7 +24,9 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	rng( std::random_device()() ),
+	board( gfx )
 {
 }
 
@@ -42,5 +44,14 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	gfx.PutPixel(100, 100, 255, 255, 255);
+	std::uniform_int_distribution<int> colorDist(0, 255);
+	for (int y = 0; y < board.getHeight(); y++)
+	{
+		for (int x = 0; x < board.getWidth(); x++)
+		{
+			std::tuple<int, int> loc = { x,y };
+			Color c(colorDist(rng), colorDist(rng), colorDist(rng));
+			board.DrawCell(loc, c);
+		}
+	}
 }

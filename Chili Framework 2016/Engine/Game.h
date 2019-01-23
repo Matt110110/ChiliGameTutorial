@@ -23,6 +23,9 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include "Board.h"
+#include <random>
+#include <tuple>
 
 class Game
 {
@@ -42,5 +45,7 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	std::mt19937 rng;
+	Board board;
 	/********************************/
 };
