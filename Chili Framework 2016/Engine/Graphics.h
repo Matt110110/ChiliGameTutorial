@@ -21,6 +21,7 @@
 #pragma once
 #include <d3d11.h>
 #include <wrl.h>
+#include <tuple>
 #include "ChiliException.h"
 #include "Colors.h"
 
@@ -56,6 +57,8 @@ public:
 		PutPixel( x,y,{ unsigned char( r ),unsigned char( g ),unsigned char( b ) } );
 	}
 	void PutPixel( int x,int y,Color c );
+	void DrawRect(std::tuple<int, int> point1, std::tuple<int, int> point2, Color c);
+	inline void DrawRect(std::tuple<int, int> point1, int width, int height, Color c) { DrawRect(point1, { std::get<0>(point1) + width, std::get<1>(point1) + height }, c); }
 	~Graphics();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>				pSwapChain;
