@@ -24,8 +24,11 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "Board.h"
+#include "Snake.h"
 #include <random>
 #include <tuple>
+
+#define Location std::tuple<int, int>
 
 class Game
 {
@@ -47,5 +50,10 @@ private:
 	/*  User Variables              */
 	std::mt19937 rng;
 	Board board;
+	Snake snek;
+	static constexpr int snekMovePeriod = 20;
+	int snekMoveCounter = 0;
+	bool isGameOver = false;
+	Location delta_loc = { 1,0 };
 	/********************************/
 };

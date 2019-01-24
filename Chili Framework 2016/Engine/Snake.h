@@ -18,6 +18,8 @@ private:
 		void Follow(const Segment & segment);
 		void Draw(Board & board) const;
 		void MoveBy(const Location & delta_loc);
+
+		Location getLocation() const;
 	private:
 		Location loc;
 		Color c;
@@ -32,6 +34,8 @@ public:
 	void MoveBy(const Location & loc);
 	void Grow();
 	void Draw(Board & board) const;
+
+	Location GetNextHead(const Location & delta_loc) const;
 
 	Snake( const Location & loc );
 	~Snake();

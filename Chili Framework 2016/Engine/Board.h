@@ -11,6 +11,7 @@ class Board
 	Graphics & gfx;
 public:
 	void DrawCell(const Location & loc, Color c);
+	bool IsInsideBoard(const Location & loc) const;
 
 	inline int getWidth() { return width; }
 	inline int getHeight() { return height; }
